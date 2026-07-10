@@ -720,9 +720,6 @@ img {
   text-align: center;
 }
 
-.contact__info {
-  text-align: center;
-}
 
 .contact__subtitle {
   font-size: var(--h3-font-size);
@@ -757,7 +754,7 @@ footer {
   padding-block: 48px 32px;
 }
 
-footer__container,
+.footer__container,
 footer__content {
   row-gap: 48px;
 }

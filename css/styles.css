@@ -1,23 +1,21 @@
-/*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&family=Unbounded:wght@700&display=swap");
 
-/*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 56px;
 
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
   --first-color: hsl(30, 100%, 58%);
+  --first-color-alt: hsl(30, 100%, 52%);
   --black-color: hsl(220, 12%, 8%);
+  --dark-color: hsl(220, 12%, 11%);
+  --dark-color-alt: hsl(220, 10%, 15%);
   --white-color: hsl(48, 90%, 90%);
-  --text-color: hsl(220, 8%, 28%);
-  --body-color: hsl(48, 80%, 90%);
-  --shadow-img: drop-shadow(0 16px 24px hsla(0, 0%, 0%, 0.2));
+  --text-color: hsl(0, 0%, 78%);
+  --body-color: hsl(220, 12%, 8%);
+  --shadow-img: drop-shadow(0 16px 24px hsla(0, 0%, 0%, 0.35));
 
-  /*========== Font and typography ==========*/
-  /*.80px = 8px | 16px = 16px ...*/
   --body-font: "Montserrat Alternates", sans-serif;
   --second-font: "Unbounded", sans-serif;
+
   --biggest-font-size: 48px;
   --bigger-font-size: 40px;
   --big-font-size: 32px;
@@ -27,17 +25,14 @@
   --normal-font-size: 15px;
   --small-font-size: 13px;
 
-  /*========== Font weight ==========*/
   --font-regular: 400;
   --font-semi-bold: 600;
   --font-bold: 700;
 
-  /*========== z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
 }
 
-/*========== Responsive typography ==========*/
 @media screen and (min-width: 1150px) {
   :root {
     --biggest-font-size: 96px;
@@ -51,7 +46,6 @@
   }
 }
 
-/*=============== BASE ===============*/
 * {
   box-sizing: border-box;
   padding: 0;
@@ -71,7 +65,7 @@ button {
 
 body {
   background-color: var(--body-color);
-  color: var(--black-color);
+  color: var(--text-color);
 }
 
 input,
@@ -80,11 +74,15 @@ button {
   outline: none;
 }
 
+button {
+  background: none;
+}
+
 h1,
 h2,
 h3,
 h4 {
-  color: var(--title-color);
+  color: var(--white-color);
   font-weight: var(--font-bold);
   font-family: var(--second-font);
 }
@@ -103,7 +101,6 @@ img {
   height: auto;
 }
 
-/*=============== REUSABLE CSS CLASSES ===============*/
 .container {
   max-width: 1120px;
   margin-inline: 24px;
@@ -131,6 +128,7 @@ img {
 
 .section__subtitle {
   display: block;
+  color: var(--first-color);
   font-size: var(--h2-font-size);
   margin-bottom: 4px;
 }
@@ -139,15 +137,26 @@ img {
   overflow: hidden;
 }
 
-/*=============== HEADER & NAV ===============*/
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0 0 auto 0;
   width: 100%;
-  background-color: var(--first-color);
+  background-color: hsla(220, 12%, 8%, 0.86);
+  backdrop-filter: blur(12px);
   z-index: var(--z-fixed);
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .nav {
@@ -169,7 +178,7 @@ img {
 }
 
 .nav-logo span {
-  color: var(--black-color);
+  color: var(--white-color);
   font-weight: var(--font-semi-bold);
   line-height: 1;
 }
@@ -177,31 +186,32 @@ img {
 .nav-toggle,
 .nav-close {
   display: inline-flex;
+  color: var(--white-color);
   font-size: 24px;
   cursor: pointer;
 }
 
 .nav-link {
-  color: var(--black-color);
-  font-family: var(--second-font);
-  transition: color 0.4s;
-}
-
-.nav-link:hover {
   color: var(--white-color);
+  font-family: var(--second-font);
+  transition: color 0.3s;
 }
 
-/* Navigation for mobile devices */
-@media screen and (max-width: 1150px) {
+.nav-link:hover,
+.active-link {
+  color: var(--first-color);
+}
+
+@media screen and (max-width: 1149px) {
   .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
     width: 80%;
     height: 100%;
-    background-color: var(--first-color);
+    background-color: var(--dark-color);
     padding: 128px 56px 0;
-    box-shadow: -4px 0 16px hsla(0, 0%, 0%, 0.1);
+    box-shadow: -4px 0 24px hsla(0, 0%, 0%, 0.35);
     transition: right 0.4s;
   }
 
@@ -211,16 +221,6 @@ img {
     row-gap: 56px;
   }
 
-  .nav-link {
-    color: var(--black-color);
-    font-family: var(--second-font);
-    transition: color 0.4s;
-
-    &:hover {
-      color: var(--white-color);
-    }
-  }
-
   .nav-close {
     position: absolute;
     top: 16px;
@@ -228,24 +228,24 @@ img {
   }
 }
 
-/* Show menu */
 .show-menu {
   right: 0;
 }
 
-/* Add shadow header */
 .shadow-header {
-  box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
+  background-color: hsla(220, 12%, 8%, 0.96);
+  box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.35);
 }
 
-/* Active link */
-.active-link {
-  color: var(--white-color);
+.home,
+.about,
+.combo {
+  background-color: var(--black-color);
 }
 
-/*=============== HOME ===============*/
-.home {
-  background-color: var(--first-color);
+.order,
+.contact {
+  background-color: var(--dark-color);
 }
 
 .home__container {
@@ -264,7 +264,7 @@ img {
 }
 
 .home__title span {
-  color: var(--white-color);
+  color: var(--first-color);
 }
 
 .home__description {
@@ -293,6 +293,7 @@ img {
 
 .home__images {
   position: relative;
+  display: grid;
   justify-content: center;
 }
 
@@ -319,24 +320,22 @@ img {
   left: -40px;
 }
 
-/*=============== BUTTON ===============*/
 .button {
   display: inline-flex;
-  background-color: var(--black-color);
-  color: var(--white-color);
+  align-items: center;
+  justify-content: center;
+  background-color: var(--first-color);
+  color: var(--black-color);
   padding: 16px 32px;
   font-weight: var(--font-semi-bold);
   border-radius: 12px;
-  transition: box-shadow 0.4s;
-
-  &:hover {
-    box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.2);
-  }
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
-/*=============== ABOUT ===============*/
-.about {
-  background-color: var(--first-color);
+.button:hover {
+  transform: translateY(-2px);
+  background-color: var(--first-color-alt);
+  box-shadow: 0 10px 24px hsla(30, 100%, 58%, 0.2);
 }
 
 .about__container {
@@ -346,11 +345,6 @@ img {
 
 .about__data {
   text-align: center;
-}
-
-.about__data,
-.section__subtitle {
-  color: var(--white-color);
 }
 
 .about__description {
@@ -389,13 +383,14 @@ img {
 
 .about__tooltip-1 {
   background-color: var(--white-color);
+  color: var(--black-color);
   top: -64px;
-  left: 0px;
+  left: 0;
 }
 
 .about__tooltip-2 {
-  background-color: var(--black-color);
-  color: var(--white-color);
+  background-color: var(--first-color);
+  color: var(--black-color);
   right: -48px;
   bottom: 48px;
   z-index: 10;
@@ -407,12 +402,10 @@ img {
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
+  inset-block: 0;
+  margin-block: auto;
   rotate: 45deg;
   border-radius: 4px;
-  background-color: red;
 }
 
 .about__tooltip-1::after {
@@ -422,13 +415,14 @@ img {
 
 .about__tooltip-2::after {
   left: -8px;
-  background-color: var(--black-color);
+  background-color: var(--first-color);
 }
 
-/*=============== ORDER ===============*/
-.order .section__title span {
+.order .section__title span,
+.combo .section__title span {
   color: var(--first-color);
 }
+
 .order__container {
   padding-block: 24px 48px;
 }
@@ -453,7 +447,6 @@ img {
 .order__shape-2 {
   background-color: var(--first-color);
   border-radius: 16px;
-  align-items: center;
   position: absolute;
 }
 
@@ -461,18 +454,16 @@ img {
   width: 180px;
   height: 100px;
   left: -48px;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
+  inset-block: 0;
+  margin-block: auto;
 }
 
 .order__shape-2 {
   width: 180px;
   height: 140px;
   right: -48px;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
+  inset-block: 0;
+  margin-block: auto;
 }
 
 .order__tooltip-1,
@@ -483,10 +474,10 @@ img {
   padding: 12px 32px 12px 12px;
   border-radius: 24px;
   z-index: 5;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
+  inset-block: 0;
+  margin-block: auto;
   height: fit-content;
+  color: var(--black-color);
 }
 
 .order__tooltip-1 {
@@ -503,14 +494,14 @@ img {
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
+  inset-block: 0;
+  margin-block: auto;
   rotate: 45deg;
   border-radius: 4px;
   background-color: var(--first-color);
   z-index: -1;
 }
+
 .order__tooltip-1::after {
   left: -8px;
 }
@@ -519,13 +510,18 @@ img {
   right: -8px;
 }
 
+.order__title,
+.order__price {
+  color: var(--black-color);
+}
+
 .order__title {
-  color: var(--white-color);
   font-size: var(--normal-font-size);
 }
 
 .order__subtitle {
   display: inline-block;
+  color: var(--black-color);
   font-size: var(--small-font-size);
   margin-bottom: 1.25em;
 }
@@ -547,22 +543,22 @@ img {
   right: 12px;
   bottom: 12px;
   cursor: pointer;
-}
-/*=============== COMBO ===============*/
-.combo {
-  background-color: var(--first-color);
+  transition: transform 0.3s;
 }
 
-.combo .section_title span {
-  color: var(--white-color);
+.order__button:hover {
+  transform: scale(1.08);
 }
+
 .combo__container {
   padding-block: 64px 144px;
 }
+
 .combo__content {
   position: relative;
   display: grid;
 }
+
 .combo__img {
   width: 320px;
   justify-self: center;
@@ -588,26 +584,26 @@ img {
 .combo__number span {
   font-size: var(--h3-font-size);
   font-family: var(--second-font);
+  color: var(--white-color);
 }
 
 .combo__number i {
+  color: var(--first-color);
   font-size: 20px;
 }
 
 .combo__title {
   font-size: var(--biggest-font-size);
-  color: var(--white-color);
+  color: var(--dark-color-alt);
   line-height: 100%;
   letter-spacing: 10px;
-  font-weight: var(--font-bold);
 }
 
 .combo__titles {
   position: absolute;
   top: 112px;
+  inset-inline: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -618,8 +614,7 @@ img {
 .combo__data {
   position: absolute;
   bottom: -56px;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   z-index: 10;
   display: flex;
   align-items: center;
@@ -629,6 +624,7 @@ img {
 
 .combo__info {
   background-color: var(--white-color);
+  color: var(--black-color);
   padding: 12px;
   border-radius: 8px;
   font-size: var(--small-font-size);
@@ -639,15 +635,14 @@ img {
 }
 
 .combo__price {
-  background-color: var(--black-color);
-  color: var(--first-color);
+  background-color: var(--first-color);
+  color: var(--black-color);
   padding: 20px;
   border-radius: 16px;
   font-size: var(--h1-font-size);
   font-family: var(--second-font);
 }
 
-/*=============== CONTACT ===============*/
 .contact__container {
   padding-block: 64px 48px;
   row-gap: 48px;
@@ -668,8 +663,16 @@ img {
 }
 
 .contact__img-1,
-.contact__img-2 {
+.contact__img-2,
+.contact__dam-1,
+.contact__dam-2,
+.contact__dam-3,
+.contact__dam-4 {
   position: absolute;
+}
+
+.contact__img-1,
+.contact__img-2 {
   filter: var(--shadow-img);
 }
 
@@ -683,13 +686,6 @@ img {
   width: 90px;
   top: 48px;
   right: 32px;
-}
-
-.contact__dam-1,
-.contact__dam-2,
-.contact__dam-3,
-.contact__dam-4 {
-  position: absolute;
 }
 
 .contact__dam-1 {
@@ -720,7 +716,6 @@ img {
   text-align: center;
 }
 
-
 .contact__subtitle {
   font-size: var(--h3-font-size);
   margin-bottom: 12px;
@@ -735,7 +730,7 @@ img {
 .contact__social-link {
   font-size: 24px;
   color: var(--first-color);
-  transition: transform 0.4s;
+  transition: transform 0.3s;
 }
 
 .contact__social-link:hover {
@@ -748,14 +743,14 @@ img {
   font-weight: var(--font-semi-bold);
 }
 
-/*=============== FOOTER ===============*/
-footer {
+.footer {
   background-color: var(--first-color);
+  color: var(--black-color);
   padding-block: 48px 32px;
 }
 
 .footer__container,
-footer__content {
+.footer__content {
   row-gap: 48px;
 }
 
@@ -784,6 +779,7 @@ footer__content {
 }
 
 .footer__title {
+  color: var(--black-color);
   font-size: var(--h3-font-size);
   margin-bottom: 12px;
   text-align: center;
@@ -792,7 +788,7 @@ footer__content {
 .footer__social-link {
   font-size: 24px;
   color: var(--black-color);
-  transition: transform 0.4s;
+  transition: transform 0.3s;
 }
 
 .footer__social-link:hover {
@@ -804,6 +800,7 @@ footer__content {
 }
 
 .footer__pay {
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -815,6 +812,7 @@ footer__content {
 
 .footer__input {
   width: 100%;
+  min-width: 0;
   background: transparent;
   padding-left: 8px;
   color: var(--black-color);
@@ -827,36 +825,42 @@ footer__content {
 .footer__button {
   padding: 16px 24px;
   border-radius: 16px;
+  background-color: var(--black-color);
+  color: var(--white-color);
   cursor: pointer;
+}
+
+.footer__message {
+  min-height: 20px;
+  margin-top: 8px;
+  color: var(--black-color);
+  font-size: var(--small-font-size);
+  text-align: center;
 }
 
 .footer__copy {
   display: block;
   margin-top: 96px;
   text-align: center;
+  color: var(--black-color);
   font-size: var(--small-font-size);
 }
-/*=============== SCROLL BAR ===============*/
+
 ::-webkit-scrollbar {
   width: 9.6px;
-  background-color: hsl(30, 32%, 70%);
+  background-color: var(--dark-color-alt);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(30, 32%, 60%);
+  background-color: var(--first-color);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(30, 32%, 50%);
-}
-
-/*=============== SCROLL UP ===============*/
 .scrollup {
   position: fixed;
   right: 16px;
-  bottom: 48px;
-  background-color: var(--white-color);
-  box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
+  bottom: -30%;
+  background-color: var(--first-color);
+  box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.25);
   color: var(--black-color);
   display: inline-flex;
   padding: 6px;
@@ -870,14 +874,16 @@ footer__content {
   transform: translateY(-8px);
 }
 
-/*=============== BREAKPOINTS ===============*/
-/* For small devices */
+.show-scroll {
+  bottom: 48px;
+}
+
 @media screen and (max-width: 320px) {
   .container {
     margin-inline: 16px;
   }
 
-  .home_title,
+  .home__title,
   .contact__title {
     font-size: 32px;
   }
@@ -886,8 +892,12 @@ footer__content {
   .contact__title span {
     font-size: 40px;
   }
+
+  .footer__form {
+    flex-direction: column;
+  }
 }
-/** For medium devices */
+
 @media screen and (min-width: 576px) {
   .nav-menu {
     width: 55%;
@@ -896,18 +906,17 @@ footer__content {
   .home__container,
   .about__container,
   .order__container {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     justify-content: center;
   }
 }
-/** For large devices */
+
 @media screen and (min-width: 1150px) {
   .container {
     margin-inline: auto;
   }
 
-  section {
+  .section {
     padding-block: 112px 32px;
   }
 
@@ -931,7 +940,6 @@ footer__content {
   }
 
   .home__container {
-    display: grid;
     grid-template-columns: 530px 550px;
     align-items: center;
     column-gap: 32px;
@@ -948,7 +956,7 @@ footer__content {
     z-index: 5;
   }
 
-  .home_description {
+  .home__description {
     margin-bottom: 56px;
     padding-right: 124px;
   }
@@ -992,7 +1000,6 @@ footer__content {
   }
 
   .about__container {
-    display: grid;
     grid-template-columns: 460px 420px;
     align-items: center;
     column-gap: 176px;
@@ -1040,7 +1047,6 @@ footer__content {
   }
 
   .order__container {
-    display: grid;
     grid-template-columns: 740px;
     row-gap: 0;
     padding-block: 64px;
@@ -1053,6 +1059,7 @@ footer__content {
   .order__img-2 {
     width: 450px;
   }
+
   .order__shape-1 {
     width: 330px;
     height: 180px;
@@ -1121,10 +1128,6 @@ footer__content {
 
   .combo__numbers {
     column-gap: 160px;
-  }
-
-  .combo__numbers {
-    column-gap: 160px;
     top: -96px;
   }
 
@@ -1156,7 +1159,6 @@ footer__content {
   }
 
   .contact__container {
-    display: grid;
     grid-template-columns: 550px 450px;
     align-items: center;
     column-gap: 56px;
@@ -1183,7 +1185,8 @@ footer__content {
 
   .contact__dam-2 {
     width: 120px;
-    bottom: -1456px;
+    right: -48px;
+    bottom: -96px;
   }
 
   .contact__dam-3 {
@@ -1198,7 +1201,6 @@ footer__content {
   }
 
   .contact__info {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 64px;
   }
@@ -1246,8 +1248,11 @@ footer__content {
     width: 340px;
   }
 
+  .footer__message {
+    text-align: initial;
+  }
+
   .scrollup {
     right: 48px;
-    bottom: 48px;
   }
 }

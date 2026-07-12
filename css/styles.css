@@ -216,7 +216,8 @@ a {
 }
 
 .nav-logo img {
-  width: 36px;
+  width: 34px;
+  flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
@@ -226,6 +227,7 @@ a {
 
 .nav-logo span {
   color: var(--white-color);
+  font-size: 16px;
   font-weight: var(--font-semi-bold);
   line-height: 1.05;
 }
@@ -241,17 +243,19 @@ a {
 .nav-toggle {
   position: relative;
   z-index: calc(var(--z-menu) + 2);
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--border-color);
-  border-radius: 14px;
+  border-radius: 12px;
   background-color: hsla(0, 0%, 100%, 0.04);
-  font-size: 24px;
+  font-size: 22px;
   transition:
     color 0.3s ease,
     background-color 0.3s ease,
     border-color 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .nav-toggle:hover {

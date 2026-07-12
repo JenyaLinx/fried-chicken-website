@@ -182,10 +182,10 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: hsla(220, 12%, 7%, 0.7);
+  background: rgba(14, 14, 14, 0.65);
   border-bottom: 1px solid transparent;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
   z-index: var(--z-fixed);
   transition:
     background-color 0.3s ease,
@@ -194,9 +194,11 @@ a {
 }
 
 .shadow-header {
-  background-color: hsla(220, 12%, 7%, 0.94);
-  border-bottom-color: var(--border-color);
-  box-shadow: 0 8px 30px hsla(0, 0%, 0%, 0.26);
+  background: rgba(10, 10, 10, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .35);
 }
 
 .nav {
@@ -289,7 +291,10 @@ a {
   display: inline-flex;
   color: var(--white-color);
   font-family: var(--second-font);
-  transition: color 0.3s ease;
+  letter-spacing: .4px;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .nav-link::after {
@@ -314,6 +319,11 @@ a {
   width: 100%;
 }
 
+
+
+.nav-link:hover {
+  text-shadow: 0 0 12px rgba(255, 153, 0, .35);
+}
 /*=============== MOBILE NAVIGATION ===============*/
 @media screen and (max-width: 1149px) {
   .nav-menu {

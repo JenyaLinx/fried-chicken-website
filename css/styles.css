@@ -544,48 +544,64 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
-  padding: 16px 30px;
-  border: 1px solid var(--first-color);
+
+  min-width: 180px;
+  height: 58px;
+
+  padding: 0 32px;
+
   border-radius: 16px;
   background: linear-gradient(
     135deg,
     var(--first-color),
     var(--first-color-alt)
   );
+
   color: var(--black-color);
-  font-weight: var(--font-semi-bold);
-  box-shadow: 0 14px 34px hsla(30, 100%, 58%, 0.2);
+  font-weight: var(--font-bold);
+
+  box-shadow: 0 12px 30px rgba(255, 145, 0, .25);
+
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform .35s ease,
+    box-shadow .35s ease;
 }
 
 .button::before {
   content: "";
+
   position: absolute;
-  top: -50%;
-  left: -80%;
-  width: 45%;
-  height: 200%;
+
+  top: 0;
+  left: -120%;
+
+  width: 60%;
+  height: 100%;
+
   background: linear-gradient(
-    90deg,
+    120deg,
     transparent,
-    hsla(0, 0%, 100%, 0.4),
+    rgba(255,255,255,.55),
     transparent
   );
-  transform: rotate(22deg);
-  transition: left 0.6s ease;
+
+  transform: skewX(-25deg);
+
+  transition: .7s;
 }
 
 .button:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 42px hsla(30, 100%, 58%, 0.3);
+
+  box-shadow:
+    0 18px 42px rgba(255,145,0,.35);
 }
 
 .button:hover::before {
-  left: 140%;
+  left: 160%;
 }
+
+
 
 .home__images {
   position: relative;

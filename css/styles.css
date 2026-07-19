@@ -661,8 +661,8 @@ a {
 }
 
 .home__dam-1 {
-  width: 54px;
-  top: 58px;
+  width: 64px;
+  top: 18px;
   right: -10px;
   animation: floatSmall 4s ease-in-out infinite;
 }
@@ -1628,6 +1628,8 @@ a {
     padding: 36px 32px;
     gap: 40px 32px;
   }
+
+
 }
 
 /*=============== LARGE DEVICES ===============*/

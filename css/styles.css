@@ -1298,9 +1298,26 @@ a {
 
 /*=============== FOOTER ===============*/
 .footer {
-  padding-block: 48px 32px;
-  background-color: var(--first-color);
-  color: var(--black-color);
+  position: relative;
+  overflow: hidden;
+
+  padding-block: 80px 40px;
+
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      hsla(30,100%,58%,.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      var(--black-color),
+      hsl(220, 12%, 5%)
+    );
+
+  border-top: 1px solid var(--border-color);
+
+  color: var(--white-color);
 }
 
 .footer__container,
@@ -1320,7 +1337,7 @@ a {
 }
 
 .footer__logo span {
-  color: var(--black-color);
+  color: var(--white-color);
   font-weight: var(--font-semi-bold);
 }
 
@@ -1334,19 +1351,36 @@ a {
 
 .footer__title {
   margin-bottom: 12px;
-  color: var(--black-color);
+  color: var(--white-color);
   font-size: var(--h3-font-size);
   text-align: center;
 }
 
 .footer__social-link {
-  color: var(--black-color);
-  font-size: 24px;
-  transition: transform 0.3s ease;
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  background: hsla(0,0%,100%,.05);
+
+  color: var(--first-color);
+
+  font-size: 20px;
+
+  transition:
+    transform .3s,
+    background-color .3s,
+    color .3s;
 }
 
 .footer__social-link:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  background: var(--first-color);
+  color: var(--black-color);
 }
 
 .footer__pay {
@@ -1360,8 +1394,14 @@ a {
 
 .footer__form {
   padding: 8px;
-  border-radius: 16px;
-  background-color: var(--white-color);
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 18px;
+
+  background: hsla(0,0%,100%,.04);
+
+  backdrop-filter: blur(10px);
 }
 
 .footer__input {
@@ -1369,19 +1409,35 @@ a {
   min-width: 0;
   padding-left: 8px;
   background: transparent;
-  color: var(--black-color);
+  color: var(--white-color);
 }
 
 .footer__input::placeholder {
-  color: var(--black-color);
+  color: var(--text-color);
 }
 
 .footer__button {
   padding: 16px 24px;
-  border-radius: 16px;
-  background-color: var(--black-color);
-  color: var(--white-color);
+
+  border-radius: 14px;
+
+  background: var(--first-color);
+
+  color: var(--black-color);
+
+  font-weight: var(--font-bold);
+
   cursor: pointer;
+
+  transition:
+    transform .3s,
+    box-shadow .3s;
+}
+
+.footer__button:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 28px rgba(255,145,0,.35);
 }
 
 .footer__message {
@@ -1395,7 +1451,7 @@ a {
 .footer__copy {
   display: block;
   margin-top: 96px;
-  color: var(--black-color);
+  color: var(--text-color);
   font-size: var(--small-font-size);
   text-align: center;
 }

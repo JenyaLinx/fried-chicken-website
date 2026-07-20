@@ -1538,6 +1538,7 @@ a {
   .home__description {
     font-size: 16px;
   }
+  
 }
 
 @media screen and (min-width: 768px) and (max-width: 1149px) {
@@ -1629,7 +1630,17 @@ a {
     gap: 40px 32px;
   }
 
+.home__dam-1 {
+    top: -62px;
+    right: 110px;
+    width: 92px;
+  }
 
+  .home__dam-2 {
+    top: -118px;
+    left: -34px;
+    width: 112px;
+  }
 }
 
 /*=============== LARGE DEVICES ===============*/
@@ -1722,14 +1733,14 @@ a {
   }
 
   .home__dam-1 {
-    top: 130px;
+    top: -32px;
     right: 110px;
     width: 92px;
   }
 
   .home__dam-2 {
-    top: -70px;
-    left: -54px;
+    top: -18px;
+    left: -88px;
     width: 112px;
   }
 

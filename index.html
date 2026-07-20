@@ -88,9 +88,141 @@
           <strong id="js-cart-total">$0.00</strong>
         </div>
 
-        <button class="cart__checkout" type="button">Checkout</button>
+        <button class="cart__checkout" id="js-checkout-open" type="button">
+          Checkout
+        </button>
       </div>
     </aside>
+    <div class="checkout-overlay" id="js-checkout-overlay"></div>
+
+    <div
+      class="checkout"
+      id="js-checkout"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="checkout-title"
+      aria-hidden="true"
+    >
+      <div class="checkout__container">
+        <div class="checkout__header">
+          <div>
+            <span class="checkout__subtitle">Complete your order</span>
+            <h2 class="checkout__title" id="checkout-title">Checkout</h2>
+          </div>
+
+          <button
+            class="checkout__close"
+            id="js-checkout-close"
+            type="button"
+            aria-label="Close checkout form"
+          >
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <form class="checkout__form" id="js-checkout-form">
+          <div class="checkout__group">
+            <label class="checkout__label" for="checkout-name">
+              Full name
+            </label>
+
+            <input
+              class="checkout__input"
+              id="checkout-name"
+              name="name"
+              type="text"
+              placeholder="John Smith"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="checkout__row">
+            <div class="checkout__group">
+              <label class="checkout__label" for="checkout-email">
+                Email
+              </label>
+
+              <input
+                class="checkout__input"
+                id="checkout-email"
+                name="email"
+                type="email"
+                placeholder="john@email.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="checkout__group">
+              <label class="checkout__label" for="checkout-phone">
+                Phone number
+              </label>
+
+              <input
+                class="checkout__input"
+                id="checkout-phone"
+                name="phone"
+                type="tel"
+                placeholder="+44 7700 000000"
+                autocomplete="tel"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="checkout__group">
+            <label class="checkout__label" for="checkout-address">
+              Delivery address
+            </label>
+
+            <input
+              class="checkout__input"
+              id="checkout-address"
+              name="address"
+              type="text"
+              placeholder="Street, house number, city"
+              autocomplete="street-address"
+              required
+            />
+          </div>
+
+          <div class="checkout__group">
+            <label class="checkout__label" for="checkout-notes">
+              Order notes
+              <span>Optional</span>
+            </label>
+
+            <textarea
+              class="checkout__textarea"
+              id="checkout-notes"
+              name="notes"
+              placeholder="Add delivery instructions..."
+            ></textarea>
+          </div>
+
+          <div class="checkout__summary">
+            <div>
+              <span>Order total</span>
+              <strong id="js-checkout-total">$0.00</strong>
+            </div>
+
+            <p id="js-checkout-items">0 items</p>
+          </div>
+
+          <button class="checkout__submit" type="submit">
+            Place order
+            <i class="ri-arrow-right-line"></i>
+          </button>
+
+          <p
+            class="checkout__message"
+            id="js-checkout-message"
+            aria-live="polite"
+          ></p>
+        </form>
+      </div>
+    </div>
 
     <main class="main">
       <!--*==================== HOME -->

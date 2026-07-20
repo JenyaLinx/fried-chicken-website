@@ -43,11 +43,54 @@
         </div>
 
         <!-- Toggle button -->
-        <div class="nav-toggle" id="js-nav-toggle">
-          <i class="ri-apps-2-fill"></i>
+        <div class="nav-actions">
+          <button
+            class="nav-cart"
+            id="js-cart-open"
+            type="button"
+            aria-label="Open shopping cart"
+          >
+            <i class="ri-shopping-bag-4-line"></i>
+            <span class="nav-cart__count" id="js-cart-count">0</span>
+          </button>
+
+          <!-- Toggle button -->
+          <div class="nav-toggle" id="js-nav-toggle">
+            <i class="ri-apps-2-fill"></i>
+          </div>
         </div>
       </nav>
     </header>
+
+    <div class="cart-overlay" id="js-cart-overlay"></div>
+
+    <aside class="cart" id="js-cart" aria-hidden="true">
+      <div class="cart__header">
+        <h2 class="cart__title">Your cart</h2>
+
+        <button
+          class="cart__close"
+          id="js-cart-close"
+          type="button"
+          aria-label="Close shopping cart"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+      <div class="cart__content" id="js-cart-content">
+        <p class="cart__empty" id="js-cart-empty">Your cart is empty.</p>
+      </div>
+
+      <div class="cart__footer">
+        <div class="cart__total">
+          <span>Total</span>
+          <strong id="js-cart-total">$0.00</strong>
+        </div>
+
+        <button class="cart__checkout" type="button">Checkout</button>
+      </div>
+    </aside>
 
     <main class="main">
       <!--*==================== HOME -->
@@ -191,7 +234,18 @@
                 <b>1kg of</b> <br />
                 fried chicken
               </div>
+
               <div class="combo__price">$32</div>
+
+              <button
+                class="combo__button order__button"
+                type="button"
+                data-title="Supreme Combo"
+                data-price="32"
+                aria-label="Add Supreme Combo to cart"
+              >
+                <i class="ri-shopping-bag-4-fill"></i>
+              </button>
             </div>
           </div>
         </div>

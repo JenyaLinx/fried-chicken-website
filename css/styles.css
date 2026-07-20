@@ -1510,6 +1510,278 @@ border-top: 1px solid var(--border-color);
   bottom: 48px;
 }
 
+/*=============== NAV ACTIONS ===============*/
+.nav-actions {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.nav-cart {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  color: var(--title-color);
+  font-size: 24px;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.nav-cart__count {
+  position: absolute;
+  top: -7px;
+  right: -9px;
+
+  display: grid;
+  place-items: center;
+
+  min-width: 18px;
+  height: 18px;
+  padding-inline: 4px;
+
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+
+  background-color: var(--first-color);
+  border-radius: 50%;
+}
+
+/*=============== CART ===============*/
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+
+  background-color: rgba(0, 0, 0, 0.55);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.cart-overlay.show-cart {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  z-index: 1200;
+
+  display: flex;
+  flex-direction: column;
+
+  width: min(100%, 420px);
+  height: 100vh;
+  padding: 24px;
+
+  background-color: var(--body-color);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.18);
+
+  transition: right 0.35s ease;
+}
+
+.cart.show-cart {
+  right: 0;
+}
+
+.cart__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cart__title {
+  color: var(--title-color);
+  font-size: 24px;
+}
+
+.cart__close {
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  color: var(--title-color);
+  font-size: 28px;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.cart__content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  padding-block: 24px;
+
+  overflow-y: auto;
+}
+
+.cart__empty {
+  margin: auto;
+
+  color: var(--text-color);
+  text-align: center;
+}
+
+.cart__item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  align-items: center;
+  column-gap: 12px;
+
+  padding: 12px;
+
+  background-color: var(--container-color);
+  border-radius: 16px;
+}
+
+.cart__item-image {
+  width: 72px;
+  height: 72px;
+
+  object-fit: contain;
+}
+
+.cart__item-title {
+  margin-bottom: 4px;
+
+  color: var(--title-color);
+  font-size: 15px;
+}
+
+.cart__item-price {
+  color: var(--first-color);
+  font-weight: 700;
+}
+
+.cart__item-controls {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  margin-top: 10px;
+}
+
+.cart__quantity-button,
+.cart__remove {
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.cart__quantity-button {
+  width: 28px;
+  height: 28px;
+
+  color: var(--title-color);
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+}
+
+.cart__remove {
+  color: #d93636;
+  font-size: 20px;
+}
+
+.cart__footer {
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cart__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+
+  color: var(--title-color);
+  font-size: 18px;
+}
+
+.cart__checkout {
+  width: 100%;
+  padding: 16px;
+
+  color: #fff;
+  font-weight: 700;
+
+  background-color: var(--first-color);
+  border: none;
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cart__checkout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 119, 0, 0.3);
+}
+
+body.cart-open {
+  overflow: hidden;
+}
+.combo__button {
+  display: grid;
+  place-items: center;
+
+  width: 56px;
+  height: 56px;
+
+  color: var(--white-color);
+  font-size: 22px;
+
+  background-color: var(--first-color);
+  border: none;
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.combo__button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 132, 22, 0.35);
+}
+
 /*=============== SMALL DEVICES ===============*/
 @media screen and (max-width: 320px) {
   .container {

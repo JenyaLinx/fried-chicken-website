@@ -172,19 +172,172 @@ if (subscribeForm && subscribeInput) {
   });
 }
 
-/*=============== ORDER BUTTONS ===============*/
+/*=============== SHOPPING CART ===============*/
+const cart = document.getElementById("js-cart");
+const cartOpen = document.getElementById("js-cart-open");
+const cartClose = document.getElementById("js-cart-close");
+const cartOverlay = document.getElementById("js-cart-overlay");
+const cartContent = document.getElementById("js-cart-content");
+const cartEmpty = document.getElementById("js-cart-empty");
+const cartCount = document.getElementById("js-cart-count");
+const cartTotal = document.getElementById("js-cart-total");
 const orderButtons = document.querySelectorAll(".order__button");
 
-orderButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const card = button.closest(".order__card");
-    const productTitle =
-      card?.querySelector(".order__title")?.textContent.trim() || "Product";
+let cartItems = [];
 
-    button.classList.add("order__button--added");
-    button.setAttribute("aria-label", `${productTitle} added to cart`);
+const openCart = () => {
+  if (!cart || !cartOverlay) return;
+
+  cart.classList.add("show-cart");
+  cartOverlay.classList.add("show-cart");
+  cart.setAttribute("aria-hidden", "false");
+  document.body.classList.add("cart-open");
+};
+
+const closeCart = () => {
+  if (!cart || !cartOverlay) return;
+
+  cart.classList.remove("show-cart");
+  cartOverlay.classList.remove("show-cart");
+  cart.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("cart-open");
+};
+
+cartOpen?.addEventListener("click", openCart);
+cartClose?.addEventListener("click", closeCart);
+cartOverlay?.addEventListener("click", closeCart);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeCart();
+  }
+});
+
+const getPriceNumber = (priceText) => {
+  const normalizedPrice = priceText.replace(",", ".");
+  const price = Number.parseFloat(normalizedPrice.replace(/[^\d.]/g, ""));
+
+  return Number.isNaN(price) ? 0 : price;
+};
+
+const updateCart = () => {
+  if (!cartContent || !cartCount || !cartTotal || !cartEmpty) return;
+
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  cartCount.textContent = totalQuantity;
+  cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+
+  cartContent
+    .querySelectorAll(".cart__item")
+    .forEach((item) => item.remove());
+
+  if (cartItems.length === 0) {
+    cartEmpty.hidden = false;
+    return;
+  }
+
+  cartEmpty.hidden = true;
+
+  cartItems.forEach((item) => {
+    const cartItem = document.createElement("article");
+
+    cartItem.className = "cart__item";
+    cartItem.dataset.id = item.id;
+
+    cartItem.innerHTML = `
+      <img
+        src="${item.image}"
+        alt="${item.title}"
+        class="cart__item-image"
+      />
+
+      <div>
+        <h3 class="cart__item-title">${item.title}</h3>
+        <span class="cart__item-price">$${item.price.toFixed(2)}</span>
+
+        <div class="cart__item-controls">
+          <button
+            class="cart__quantity-button"
+            type="button"
+            data-action="decrease"
+            aria-label="Decrease quantity"
+          >
+            <i class="ri-subtract-line"></i>
+          </button>
+
+          <span>${item.quantity}</span>
+
+          <button
+            class="cart__quantity-button"
+            type="button"
+            data-action="increase"
+            aria-label="Increase quantity"
+          >
+            <i class="ri-add-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="cart__remove"
+        type="button"
+        data-action="remove"
+        aria-label="Remove ${item.title}"
+      >
+        <i class="ri-delete-bin-6-line"></i>
+      </button>
+    `;
+
+    cartContent.appendChild(cartItem);
+  });
+};
+
+orderButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    const card = button.closest(".order__card, .combo__content");
+
+if (!card) return;
+
+    const title =
+  button.dataset.title ||
+  card.querySelector(".order__title")?.textContent.trim() ||
+  `Product ${index + 1}`;
+
+const priceText =
+  button.dataset.price ||
+  card.querySelector(".order__price, .combo__price")?.textContent.trim() ||
+  "0";
+
+    const image =
+      card.querySelector("img")?.getAttribute("src") || "./img/logo.svg";
+
+    const productId = `${title}-${index}`;
+    const existingItem = cartItems.find((item) => item.id === productId);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cartItems.push({
+        id: productId,
+        title,
+        price: getPriceNumber(priceText),
+        image,
+        quantity: 1,
+      });
+    }
 
     const icon = button.querySelector("i");
+
+    button.classList.add("order__button--added");
 
     if (icon) {
       icon.className = "ri-check-line";
@@ -192,17 +345,53 @@ orderButtons.forEach((button) => {
 
     setTimeout(() => {
       button.classList.remove("order__button--added");
-      button.setAttribute(
-        "aria-label",
-        `Add ${productTitle} to cart`
-      );
 
       if (icon) {
         icon.className = "ri-shopping-bag-4-fill";
       }
-    }, 1500);
+    }, 1000);
+
+    updateCart();
+    openCart();
   });
 });
+
+cartContent?.addEventListener("click", (event) => {
+  const actionButton = event.target.closest("[data-action]");
+  const cartItem = event.target.closest(".cart__item");
+
+  if (!actionButton || !cartItem) return;
+
+  const productId = cartItem.dataset.id;
+  const action = actionButton.dataset.action;
+  const item = cartItems.find((product) => product.id === productId);
+
+  if (!item) return;
+
+  if (action === "increase") {
+    item.quantity += 1;
+  }
+
+  if (action === "decrease") {
+    item.quantity -= 1;
+
+    if (item.quantity <= 0) {
+      cartItems = cartItems.filter(
+        (product) => product.id !== productId
+      );
+    }
+  }
+
+  if (action === "remove") {
+    cartItems = cartItems.filter(
+      (product) => product.id !== productId
+    );
+  }
+
+  updateCart();
+});
+
+updateCart();
 
 /*=============== CURRENT YEAR ===============*/
 const footerCopy = document.querySelector(".footer__copy");

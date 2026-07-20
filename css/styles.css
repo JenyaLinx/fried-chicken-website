@@ -1322,7 +1322,7 @@ a {
 
 .footer__container,
 .footer__content {
-  row-gap: 48px;
+  row-gap: 56px;
 }
 
 .footer__logo {
@@ -1330,6 +1330,7 @@ a {
   align-items: center;
   justify-self: center;
   column-gap: 4px;
+  transition: transform .35s ease;
 }
 
 .footer__logo img {
@@ -1339,6 +1340,10 @@ a {
 .footer__logo span {
   color: var(--white-color);
   font-weight: var(--font-semi-bold);
+}
+
+.footer__logo:hover {
+    transform: translateY(-3px);
 }
 
 .footer__social,
@@ -1389,7 +1394,12 @@ a {
 }
 
 .footer__pay-card {
-  width: 30px;
+  width: 34px;
+  transition: transform .3s ease;
+}
+
+.footer__pay-card:hover {
+    transform: translateY(-3px) scale(1.05);
 }
 
 .footer__form {
@@ -1454,6 +1464,9 @@ a {
   color: var(--text-color);
   font-size: var(--small-font-size);
   text-align: center;
+  padding-top: 32px;
+border-top: 1px solid var(--border-color);
+
 }
 
 /*=============== SCROLLBAR ===============*/

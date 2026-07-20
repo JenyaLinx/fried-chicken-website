@@ -16,6 +16,10 @@ const showMenu = () => {
   if (!navMenu) return;
 
   navMenu.classList.add("show-menu");
+  if (navToggle) {
+  navToggle.style.visibility = "hidden";
+  navToggle.style.pointerEvents = "none";
+}
 
   if (navToggle) {
     navToggle.setAttribute("aria-expanded", "true");
@@ -31,6 +35,11 @@ const hideMenu = () => {
   if (!navMenu) return;
 
   navMenu.classList.remove("show-menu");
+  
+  if (navToggle) {
+  navToggle.style.visibility = "visible";
+  navToggle.style.pointerEvents = "auto";
+}
 
   if (navToggle) {
     navToggle.setAttribute("aria-expanded", "false");
